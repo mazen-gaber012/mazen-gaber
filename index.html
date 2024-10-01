@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>محول أنظمة العد</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+            margin-top: 50px;
+        }
+        .converter {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            display: inline-block;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        select, input {
+            padding: 10px;
+            margin: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="converter">
+        <h1>محول أنظمة العد</h1>
+        <input type="number" id="numberInput" placeholder="أدخل الرقم">
+        <br>
+        <label for="fromSystem">من نظام:</label>
+        <select id="fromSystem">
+            <option value="decimal">عشري</option>
+            <option value="binary">ثنائي</option>
+            <option value="octal">ثماني</option>
+            <option value="hexadecimal">ست عشري</option>
+        </select>
+        <label for="toSystem">إلى نظام:</label>
+        <select id="toSystem">
+            <option value="decimal">عشري</option>
+            <option value="binary">ثنائي</option>
+            <option value="octal">ثماني</option>
+            <option value="hexadecimal">ست عشري</option>
+        </select>
+        <br>
+        <button onclick="convert()">تحويل</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function convert() {
+            const numberInput = document.getElementById("numberInput").value;
+            const fromSystem = document.getElementById("fromSystem").value;
+            const toSystem = document.getElementById("toSystem").value;
+            
+            let decimalValue;
+            
+            // تحويل الرقم المدخل إلى العشري
+            if (fromSystem === "decimal") {
+                decimalValue = parseInt(numberInput, 10);
+            } else if (fromSystem === "binary") {
+                decimalValue = parseInt(numberInput, 2);
+            } else if (fromSystem === "octal") {
+                decimalValue = parseInt(numberInput, 8);
+            } else if (fromSystem === "hexadecimal") {
+                decimalValue = parseInt(numberInput, 16);
+            }
+
+            let result;
+            
+            // تحويل العشري إلى النظام المطلوب
+            if (toSystem === "decimal") {
+                result = decimalValue.toString(10);
+            } else if (toSystem === "binary") {
+                result = decimalValue.toString(2);
+            } else if (toSystem === "octal") {
+                result = decimalValue.toString(8);
+            } else if (toSystem === "hexadecimal") {
+                result = decimalValue.toString(16).toUpperCase();
+            }
+
+            document.getElementById("result").innerText = "الناتج: " + result;
+        }
+    </script>
+</body>
+</html>
